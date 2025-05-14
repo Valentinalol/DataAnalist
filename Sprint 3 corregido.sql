@@ -50,10 +50,9 @@ WHERE id = "CcU-2938";
 #amount	111.11
 #declined	0
 
-USE company;
 INSERT INTO company (id)
 VALUES ("b-9999");
-USE transactions;
+
 INSERT INTO transaction (Id, credit_card_id, company_id, user_id, lat, longitude, amount, declined) 
 VALUES ("108B1D1D-5B23-A76C-55EF-C568E49A99DD", "CcU-9999", "b-9999", "9999", "829.999", "-117.999",
 111.11, 0);
@@ -86,6 +85,7 @@ FROM transaction where id = "02C6201E-D90A-1859-B4EE-88D2986D3B02";
 #País de residència. Mitjana de compra realitzat per cada companyia. Presenta la vista creada, 
 #ordenant les dades de major a menor mitjana de compra.
 
+CREATE VIEW `vistamarketing`AS
 SELECT company_name as nombrecompañia, phone as telefono, country as pais, 
 round(avg(amount),2) as compramedia
 FROM company
@@ -103,7 +103,7 @@ FROM vistamarketing;
 
 SELECT *
 FROM Vistamarketing
-WHERE pais IN ("Germany");
+WHERE pais = "Germany";
 
 #Nivell 3
 #Exercici 1
@@ -155,6 +155,7 @@ REFERENCES `data_user`(`id`);
 #Mostra els resultats de la vista, ordena els resultats de manera descendent
 #en funció de la variable ID de transaction.
 
+CREATE VIEW `informetecnico` AS
 SELECT transaction.id as Idtransaccion, name as NombreUsuaria, surname as Apellido, 
 iban, company_name AS nombrecompañia
 FROM transaction
@@ -164,3 +165,7 @@ JOIN credit_card ON  credit_card_id = credit_card.id
 ORDER BY Idtransaccion DESC;
 SELECT*
 FROM informetecnico;
+
+
+
+
